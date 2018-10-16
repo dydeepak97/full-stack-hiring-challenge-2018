@@ -16,3 +16,28 @@ exports.createFile = function(fName, fPath, content, type){
         }
     })
 }
+
+console.log(db);
+
+
+
+
+addFile = function(fName, fPath, content){
+    let dirLevels = fPath.split('/')
+    console.log(dirLevels)
+    var temp = db
+    for(let level in dirLevels){
+        console.log("Index: ", dirLevels[level])
+        console.log("Vals: ", temp[dirLevels[level]]);
+        console.log("Childs: ", temp[dirLevels[level]]["sub"]);
+        
+        temp = temp[dirLevels[level]]["sub"]
+    }
+    temp[fName][type] = "file"
+    temp[fName]["sub"] = {}
+
+    console.log(temp);
+    
+}
+
+addFile("ABC", "root/dir1/dirB" , "hello")

@@ -1,6 +1,25 @@
 {
     "root": {
         "type": "dir",
-        "sub": null
+        "sub": {
+            "dir1":{
+                "type": "dir",
+                "sub": {
+                    "dirA":{
+                        "type": "file",
+                        "sub":null
+                    }
+                }
+            },
+            "dir2":{
+                "type": "dir",
+                "sub": {
+                    "dirB":{
+                        "type":"file",
+                        "sub": null
+                    }
+                }
+            }
+        }
     }
 }
