@@ -30,14 +30,19 @@ addFile = function(fName, fPath, content){
         console.log("Index: ", dirLevels[level])
         console.log("Vals: ", temp[dirLevels[level]]);
         console.log("Childs: ", temp[dirLevels[level]]["sub"]);
+        if(temp[dirLevels[level]]["sub"].length != 0){
+            temp = temp[dirLevels[level]]["sub"]
+        }
+        console.log("TEMP :", temp);
         
-        temp = temp[dirLevels[level]]["sub"]
     }
-    temp[fName][type] = "file"
-    temp[fName]["sub"] = {}
+    temp.push({
+        "type": "file",
+        "sub": null
+    })
 
     console.log(temp);
     
 }
 
-addFile("ABC", "root/dir1/dirB" , "hello")
+addFile("ABC", "root/dir1/dirA" , "hello")

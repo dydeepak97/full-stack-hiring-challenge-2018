@@ -6,8 +6,8 @@
                 "type": "dir",
                 "sub": {
                     "dirA":{
-                        "type": "file",
-                        "sub":null
+                        "type": "dir",
+                        "sub": {}
                     }
                 }
             },
@@ -15,8 +15,8 @@
                 "type": "dir",
                 "sub": {
                     "dirB":{
-                        "type":"file",
-                        "sub": null
+                        "type":"dir",
+                        "sub": {}
                     }
                 }
             }
