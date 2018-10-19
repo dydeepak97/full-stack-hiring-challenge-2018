@@ -65,7 +65,20 @@ exports.addFile = function(fPath, fContent , fType){
     let writeDB = JSON.stringify(db, null, 2); 
     fs.writeFile('./database/database.json', writeDB);
 
-    mkdirp(fPath, function (err) {
+    let dirPath;
+    let fName;
+    if(fType == "folder"){
+        dirPath = dirLevels.join('/');
+    }
+    else if(fType == "file"){
+        fName = dirLevels[dirLevels.length-1];
+        dirLevels.splice(dirLevels.length-1, 1);
+        dirPath = dirLevels.join('/');
+    }
+    console.log(dirPath);
+    
+
+    mkdirp(dirPath, function (err) {
         if (err) console.error(err)
         else console.log('pow!')
     });
@@ -73,4 +86,4 @@ exports.addFile = function(fPath, fContent , fType){
 }
 
 
-exports.addFile("root/dir1/dirC/dirC1/db1A" , "hello", "file")
+//exports.addFile("root/dir1/dirC/dirC1/db1A" , "hello", "file")
