@@ -1,5 +1,6 @@
 const database = require('./db')
 const fs = require('fs')
+const mkdirp = require('mkdirp');
 
 const db = database.getDB()
 
@@ -23,7 +24,7 @@ console.log(db);
 
 
 
-addFile = function(fName, fPath, content){
+exports.addFile = function(fPath, fContent , fType){
     let dirLevels = fPath.split('/')
     console.log(dirLevels)
     var temp = db
@@ -32,11 +33,14 @@ addFile = function(fName, fPath, content){
         console.log("Vals: ", temp[dirLevels[level]]);
         console.log("Childs: ", temp[dirLevels[level]]);
         if(temp[dirLevels[level]] == undefined){
-            temp[dirLevels[level]] = {"type" : "dir"};
-            console.log("Creating Dir...");
-            
+            if(level == dirLevels.length - 1){
+                temp[dirLevels[level]] = {"type" : fType};
+            }
+            else{
+                temp[dirLevels[level]] = {"type" : "dir"};
+                console.log("Creating Dir...");
+            }   
         }
-
         if(  temp[dirLevels[level]] != undefined){
             console.log("Still"); 
             temp = temp[dirLevels[level]]
@@ -50,9 +54,9 @@ addFile = function(fName, fPath, content){
     }
     // temp["fName"]["type"] = "file";
     // temp["fName"]["sub"] = null;
-    temp[fName] = {
-            "type" : "file"
-    };
+    // temp[fName] = {
+    //         "type" : "file"
+    // };
         
 
     console.log("Temp" , temp);
@@ -60,8 +64,13 @@ addFile = function(fName, fPath, content){
     exports.db = db;
     let writeDB = JSON.stringify(db, null, 2); 
     fs.writeFile('./database/database.json', writeDB);
+
+    mkdirp(fPath, function (err) {
+        if (err) console.error(err)
+        else console.log('pow!')
+    });
     
 }
 
 
-addFile("db1A", "root/dir1/dirA" , "hello")
+exports.addFile("root/dir1/dirC/dirC1/db1A" , "hello", "file")

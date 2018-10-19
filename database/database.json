@@ -20,6 +20,15 @@
         "Nibba": {
           "type": "file"
         }
+      },
+      "dirC": {
+        "type": "dir",
+        "dirC1": {
+          "type": "dir",
+          "db1A": {
+            "type": "file"
+          }
+        }
       }
     },
     "dir2": {
