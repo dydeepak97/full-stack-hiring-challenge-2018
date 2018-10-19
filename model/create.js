@@ -1,21 +1,22 @@
 const database = require('./db')
+const fs = require('fs')
 
 const db = database.getDB()
 
-exports.createFile = function(fName, fPath, content, type){
-    let queryString = "INSERT INTO files ( fName, fPath, content , type ) VALUES ( ?, ?, ?, ? );"
+// exports.createFile = function(fName, fPath, content, type){
+//     let queryString = "INSERT INTO files ( fName, fPath, content , type ) VALUES ( ?, ?, ?, ? );"
 
-    db.query(queryString, [ fName, fPath, content, type ], (err, result, fields) => {
-        if(err){
-            //SEND RESPONSE WITH ERROR
-            return false
-        }
-        else{
-            //SEND SUCCESS MESSAGE
-            return true
-        }
-    })
-}
+//     db.query(queryString, [ fName, fPath, content, type ], (err, result, fields) => {
+//         if(err){
+//             //SEND RESPONSE WITH ERROR
+//             return false
+//         }
+//         else{
+//             //SEND SUCCESS MESSAGE
+//             return true
+//         }
+//     })
+// }
 
 console.log(db);
 
@@ -29,20 +30,38 @@ addFile = function(fName, fPath, content){
     for(let level in dirLevels){
         console.log("Index: ", dirLevels[level])
         console.log("Vals: ", temp[dirLevels[level]]);
-        console.log("Childs: ", temp[dirLevels[level]]["sub"]);
-        if(temp[dirLevels[level]]["sub"].length != 0){
-            temp = temp[dirLevels[level]]["sub"]
+        console.log("Childs: ", temp[dirLevels[level]]);
+        if(temp[dirLevels[level]] == undefined){
+            temp[dirLevels[level]] = {"type" : "dir"};
+            console.log("Creating Dir...");
+            
+        }
+
+        if(  temp[dirLevels[level]] != undefined){
+            console.log("Still"); 
+            temp = temp[dirLevels[level]]
+             
         }
         console.log("TEMP :", temp);
+
+       
+        
         
     }
-    temp.push({
-        "type": "file",
-        "sub": null
-    })
+    // temp["fName"]["type"] = "file";
+    // temp["fName"]["sub"] = null;
+    temp[fName] = {
+            "type" : "file"
+    };
+        
 
-    console.log(temp);
+    console.log("Temp" , temp);
+    //console.log("DB" , db["root"]["sub"]["dir1"]["sub"]["dirA"]);
+    exports.db = db;
+    let writeDB = JSON.stringify(db, null, 2); 
+    fs.writeFile('./database/database.json', writeDB);
     
 }
 
-addFile("ABC", "root/dir1/dirA" , "hello")
+
+addFile("db1A", "root/dir1/dirA" , "hello")

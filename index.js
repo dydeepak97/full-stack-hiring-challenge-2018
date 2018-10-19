@@ -1,5 +1,5 @@
 const server = require('./server')
-const routes = require('./routes')
+const routes = require('./router/routes')
 const database = require('./model/db')
 const create = require('./model/create')
 

@@ -1,12 +1,14 @@
 //const mysql = require('mysql')
 
 const fs = require('fs')
+// const create = require('./create')
 const dataRaw = fs.readFileSync('./database/database.json')
 const database = JSON.parse(dataRaw)
 
 exports.getDB = function(){
     return database
 }
+
 
 // const db = mysql.createConnection({
 //     host: 'localhost',

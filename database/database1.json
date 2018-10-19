@@ -10,9 +10,6 @@
         },
         "ABC": {
           "type": "file"
-        },
-        "db1A": {
-          "type": "file"
         }
       },
       "dirB": {
@@ -27,15 +24,6 @@
       "dirB": {
         "type": "dir",
         "Nibba": {
-          "type": "file"
-        }
-      }
-    },
-    "dir3": {
-      "type": "dir",
-      "dirB": {
-        "type": "dir",
-        "db3B": {
           "type": "file"
         }
       }
